@@ -19,5 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = ["powder"]
   s.require_paths = ["lib"]
 
-  s.add_dependency 'thor', '>=0.9.2'
+  s.add_dependency 'thor', '~> 0.14.4'
+  s.add_development_dependency 'mocha', '~> 0.9.12'
+  s.add_development_dependency 'test-construct', '~> 1.2.0'
 end
