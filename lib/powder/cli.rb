@@ -24,7 +24,7 @@ module Powder
       name ||= current_dir
       name = pow_name(name)
       create_link "#{POWPATH}/#{name}", Dir.pwd
-      say "Your application is now available at http://#{name}.#{domain}/", :green
+      say "Your application is now available at http://#{name}.#{domain}/"
     end
 
     desc "restart", "Restart current pow"
@@ -141,9 +141,8 @@ module Powder
 
       def domain
         if File.exists? '~/.powconfig'
-          %x{source ~/.powconfig}
-          returned_domain = ENV['POW_DOMAINS'].gsub("\n", "").split(",").first
-          returned_domain = ENV['POW_DOMAIN'].gsub("\n", "") if returned_domain.nil? || returned_domain.empty?
+          returned_domain = %x{source ~/.powconfig; echo $POW_DOMAINS}.gsub("\n", "").split(",").first
+          returned_domain = %x{source ~/.powconfig; echo $POW_DOMAIN}.gsub("\n", "") if returned_domain.nil? || returned_domain.empty?
           returned_domain = 'dev' if returned_domain.nil? || returned_domain.empty?
           returned_domain
         else
