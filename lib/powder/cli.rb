@@ -24,7 +24,7 @@ module Powder
       name ||= current_dir
       name = pow_name(name)
       create_link "#{POWPATH}/#{name}", Dir.pwd
-      say "Your application is now available at http://#{name}.#{domain}/"
+      say "Your application is now available at http://#{name}.#{domain}/", :green
     end
 
     desc "restart", "Restart current pow"
@@ -126,12 +126,11 @@ module Powder
             get "https://gist.github.com/909308.txt", "#{Dir.pwd}/config.ru"
             true
           else
-            say "Did not create config.ru"
+            say "Did not create config.ru", :red
             false
           end
         else
-          say "This does not appear to be a rack app as there is no config.ru."
-          say "Pow can also host static apps if there is an index.html in public/"
+          say "This does not appear to be a rack app as there is no config.ru.\nPow can also host static apps if there is an index.html in public/", :red
           false
         end
       end
